@@ -38,26 +38,14 @@ struct GalaxyHome: View {
                         
                         Spacer()
                         
-                        HStack() {
-                            TextTile(title: "Mission", subtitle: "Moon")
-                            Spacer()
-                        }
-                        .padding()
-                        HStack() {
-                            TextTile(title: "Mission", subtitle: "Mars")
-                            Spacer()
-                        }
-                        .padding()
-                        HStack() {
-                            TextTile(title: "Mission", subtitle: "By ISRO")
-                            Spacer()
-                        }
-                        .padding()
-                        HStack() {
-                            TextTile(title: "Mission", subtitle: "By NASA")
-                            Spacer()
-                        }
-                        .padding()
+                        HeadView(title: "Mission", subtitle: "Moon")
+                        
+                        HeadView(title: "Mission", subtitle: "Mars")
+                        
+                        HeadView(title: "Mission", subtitle: "By ISRO")
+                        
+                        HeadView(title: "Mission", subtitle: "By NASA")
+                        
                         Spacer()
                         
                     }
@@ -78,6 +66,31 @@ struct GalaxyHome: View {
 #Preview {
     GalaxyHome()
 }
+struct HeadView: View {
+    var title: String
+    var subtitle: String
+    
+    var body: some View {
+        HStack {
+            Image("sun")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 60, height: 60)
+            
+            HStack() {
+                TextTile(title: title, subtitle: subtitle)
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.descText)
+                    .font(.title3)
+            }
+        }
+        .padding()
+        .foregroundColor(.white)
+        .background(Color.black.opacity(0.3))
+        
+    }
+}
 
 struct TextTile: View {
     var title: String
@@ -85,12 +98,12 @@ struct TextTile: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(title)
-                .font(.largeTitle)
-                .fontWeight(.black)
-                .foregroundColor(.descText)
-            Text(subtitle)
                 .font(.subheadline)
                 .fontWeight(.semibold)
+                .foregroundColor(.descText)
+            Text(subtitle)
+                .font(.largeTitle)
+                .fontWeight(.black)
                 .foregroundColor(.descText)
         }
     }
